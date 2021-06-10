@@ -1,4 +1,9 @@
 const Node = require('./BinarySearchTreeNode.js').BinarySearchTreeNode;
+const prompt = require('../prompt').rl;
+
+function print(message){
+  console.log(`*** ${message} ***`);
+}
 
 class BinarySearchTree {
     constructor(){
@@ -7,8 +12,25 @@ class BinarySearchTree {
         this.inorder = inorder;
         this.findMinValue = findMinValue;
         this.findMaxValue = findMaxValue;
+        this.find = find;
         this.show = () => this.root
     }
+}
+
+function find(value){
+  let current_node = this.root; // always start exploring with the root node
+  while(current_node.data !== value){
+    if(value < current_node.data){ // travel down the left nodes while the value is <
+      current_node = current_node.left
+    } else { // travel down the right nodes while the value is >
+      current_node = current_node.right;
+    }
+    if(current_node == null){
+      console.log("Cannot find value", value)
+      return null
+    };
+  }
+  return console.log(current_node);
 }
 
 function findMaxValue(){
@@ -76,14 +98,22 @@ numbers.insert(2);
 exports.numbers = numbers;
 // check content
 
-console.log('*** Binary Tree ***');
+print("Binary Tree")
 console.log(numbers.show());
 
-console.log('*** Tree Inorder Traversal ***');
+print("BST inorder Traversal")
 inorder(numbers.root); // keep in mind root is an object
 
-console.log('*** Tree Min value ***');
+print("Tree Min Value")
 numbers.findMinValue();
 
-console.log('*** Tre Max Value ***');
+print("Tree Max Value")
 numbers.findMaxValue();
+
+
+
+prompt.question("Search for a value in the BST ? \n ", (val) => {
+  print("Node with a specific value");
+  numbers.find(parseInt(val));
+  prompt.close();
+});
