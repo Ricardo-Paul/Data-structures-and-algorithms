@@ -33,8 +33,4 @@ for(let i = 0; i < arr.length; i++){
      console.log(total)
 }
 
-// My favorite singer: Eminem
-// ricardo00!
-
-// My first pet's name: Douki
 // What was your major during college: Computer Science
